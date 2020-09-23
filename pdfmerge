@@ -1,0 +1,19 @@
+const merge = require('easy-pdf-merge');
+
+async function run(){}{
+  const fs = require('fs');
+  const pdf = require('pdf-parse');
+  
+  var files = fs.readdirSync('C:/User/xys/sds/')l
+  var prefix = 'C:/User/xys/sds/';
+  var files = files.map(e1 => profile + e1);
+  
+  merge(files , 'C:/User/xys/sds/merge.pdf (err) {
+  if(err) {
+    return console.log(err)
+  }
+  console.log('Successfully merged!')
+  });
+}
+
+run();
