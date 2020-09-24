@@ -1,14 +1,20 @@
+const libre = require('libreoffice-convert');
+ 
 const path = require('path');
-const unoconv = require('awesome-unoconv');
+const fs = require('fs');
  
-const sourceFilePath = path.resolve('./myDoc.docx');
-const outputFilePath = path.resolve('./myDoc.pdf');
+const extend = '.pdf'
+const enterPath = path.join(__dirname, '/resources/example.docx');
+const outputPath = path.join(__dirname, `/resources/example${extend}`);
  
-unoconv
-  .convert(sourceFilePath, outputFilePath)
-  .then(result => {
-    console.log(result); // return outputFilePath
-  })
-  .catch(err => {
-    console.log(err);
-  });
+// Read file
+const file = fs.readFileSync(enterPath);
+// Convert it to pdf format with undefined filter (see Libreoffice doc about filter)
+libre.convert(file, extend, undefined, (err, done) => {
+    if (err) {
+      console.log(`Error converting file: ${err}`);
+    }
+    
+    // Here in done you have pdf file which you can save or transfer in another stream
+    fs.writeFileSync(outputPath, done);
+});
